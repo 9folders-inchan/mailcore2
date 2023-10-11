@@ -28,7 +28,8 @@ OperationQueue::OperationQueue()
     mQuitting = false;
     mCallback = NULL;
 #if __APPLE__
-    mDispatchQueue = dispatch_get_main_queue();
+    mDispatchQueue = NULL;
+    setDispatchQueue(dispatch_get_main_queue());
 #endif
     _pendingCheckRunning = false;
 }
