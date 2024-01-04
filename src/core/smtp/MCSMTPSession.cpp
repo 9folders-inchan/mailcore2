@@ -493,6 +493,9 @@ void SMTPSession::login(ErrorCode * pError)
             setAuthType((AuthType) (authType() | AuthTypeSASLDIGESTMD5));
         }
 #endif
+        else if (mSmtp->auth & MAILSMTP_AUTH_PLAIN) {
+            setAuthType((AuthType) (authType() | AuthTypeSASLPlain));
+        }
         else if (mSmtp->auth & MAILSMTP_AUTH_CRAM_MD5) {
             setAuthType((AuthType) (authType() | AuthTypeSASLCRAMMD5));
         }
@@ -507,9 +510,6 @@ void SMTPSession::login(ErrorCode * pError)
         }
         else if (mSmtp->auth & MAILSMTP_AUTH_KERBEROS_V4) {
             setAuthType((AuthType) (authType() | AuthTypeSASLKerberosV4));
-        }
-        else if (mSmtp->auth & MAILSMTP_AUTH_PLAIN) {
-            setAuthType((AuthType) (authType() | AuthTypeSASLPlain));
         }
         else if (mSmtp->auth & MAILSMTP_AUTH_LOGIN) {
             setAuthType((AuthType) (authType() | AuthTypeSASLLogin));
