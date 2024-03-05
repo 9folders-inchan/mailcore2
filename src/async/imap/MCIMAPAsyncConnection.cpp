@@ -100,9 +100,7 @@ IMAPAsyncConnection::IMAPAsyncConnection()
 {
     mSession = new IMAPSession();
     mQueue = new OperationQueue();
-#ifdef DEBUG
     mQueue->retain();
-#endif
     mDefaultNamespace = NULL;
     mClientIdentity = new IMAPIdentity();
     mLastFolder = NULL;
@@ -130,12 +128,10 @@ IMAPAsyncConnection::~IMAPAsyncConnection()
     MC_SAFE_RELEASE(mLastFolder);
     MC_SAFE_RELEASE(mClientIdentity);
     MC_SAFE_RELEASE(mDefaultNamespace);
-#ifdef DEBUG
     int queueRetainCount = mQueue->retainCount();
     if (queueRetainCount > 1) {
         mQueue->release();
     }
-#endif
     MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mSession);
 }
